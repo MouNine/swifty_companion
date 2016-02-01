@@ -13,6 +13,7 @@ import JSONJoy
 class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var token = Token.sharedInstance
     var toUser: User!
+    var toAccess: String!
     
     @IBOutlet weak var go_back: UIButton!
     
@@ -50,6 +51,8 @@ class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 image.image = UIImage(data: data)
             }
         }
+        
+        print("ACCESS TOKEN, SECOND VIEW: \(token.setAccess(toAccess))")
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +86,7 @@ class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }else if fm.final_mark < 50 {
                 cell.finalMark?.text = ("\(fm.final_mark!)% - FAILED")
             } else {
-                cell.finalMark?.text = ("\(fm.final_mark!)%")
+                cell.finalMark?.text = ("\(fm.final_mark!)% - SUCCEEDED")
             }
             return cell
         } else {

@@ -9,7 +9,7 @@
 import Foundation
 import JSONJoy
 
-var instance : Token?
+var instance: Token?
 
 class Token: JSONJoy {
     

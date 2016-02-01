@@ -63,7 +63,7 @@ class ViewController: UIViewController {
                 if let access_token = self.token.access_token {
                     print("completed: \(access_token)")
                 }
-                print(self.token.getAccess())
+                print("ACCESS TOKEN, FIRST VIEW: \(self.token.getAccess())")
             }
         } catch let error {
             print("got an error creating the request: \(error)")
@@ -100,6 +100,7 @@ class ViewController: UIViewController {
         if (segue.identifier == "SegueToSecond") {
             let svc = segue.destinationViewController as! TwoViewController;
             svc.toUser = self.user!
+            svc.toAccess = self.token.getAccess()
         }
     }
 }
