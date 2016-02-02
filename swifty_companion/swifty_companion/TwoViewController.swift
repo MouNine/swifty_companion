@@ -76,25 +76,23 @@ class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == projectsTable {
             let cell = projectsTable.dequeueReusableCellWithIdentifier("projectsCell", forIndexPath: indexPath) as! SCTableViewCell
-            let fm = toUser.projects![indexPath.row]
             
-//            let sortProject = toUser.projects!.sort{ $0.slug < $1.slug }
-            cell.nameProjects?.text = fm.slug
-            cell.finalMark?.text = ("\(fm)%")
-            if fm.final_mark == nil {
+            let sortProject = toUser.projects!.sort{ $0.slug < $1.slug }
+            cell.nameProjects?.text = sortProject[indexPath.row].slug
+            if sortProject[indexPath.row].final_mark == nil {
                 cell.finalMark?.text = "Loading"
-            }else if fm.final_mark < 50 {
-                cell.finalMark?.text = ("\(fm.final_mark!)% - FAILED")
+            }else if sortProject[indexPath.row].final_mark < 50 {
+                cell.finalMark?.text = ("\(sortProject[indexPath.row].final_mark!)% - FAILED")
             } else {
-                cell.finalMark?.text = ("\(fm.final_mark!)% - SUCCEEDED")
+                cell.finalMark?.text = ("\(sortProject[indexPath.row].final_mark!)% - SUCCEEDED")
             }
             return cell
         } else {
             let cell = skillsTable.dequeueReusableCellWithIdentifier("skillsCell", forIndexPath: indexPath) as! SCTableViewCell
             
- //           let sortSkill = toUser.skills!.sort{ $0.nameSkill < $1.nameSkill }
-            let ns = toUser.skills![indexPath.row].nameSkill
-            let ps = String(toUser.skills![indexPath.row].percentSkill!)
+            let sortSkill = toUser.skills!.sort{ $0.nameSkill < $1.nameSkill }
+            let ns = sortSkill[indexPath.row].nameSkill
+            let ps = String(sortSkill[indexPath.row].percentSkill!)
             
             cell.nameSkills?.text = ns
             
