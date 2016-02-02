@@ -78,8 +78,8 @@ class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             let cell = projectsTable.dequeueReusableCellWithIdentifier("projectsCell", forIndexPath: indexPath) as! SCTableViewCell
             let fm = toUser.projects![indexPath.row]
             
-            let sortProject = toUser.projects!.sort{ $0.slug < $1.slug }
-            cell.nameProjects?.text = sortProject[indexPath.row].slug
+//            let sortProject = toUser.projects!.sort{ $0.slug < $1.slug }
+            cell.nameProjects?.text = fm.slug
             cell.finalMark?.text = ("\(fm)%")
             if fm.final_mark == nil {
                 cell.finalMark?.text = "Loading"
@@ -92,8 +92,8 @@ class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         } else {
             let cell = skillsTable.dequeueReusableCellWithIdentifier("skillsCell", forIndexPath: indexPath) as! SCTableViewCell
             
-            let sortSkill = toUser.skills!.sort{ $0.nameSkill < $1.nameSkill }
-            let ns = sortSkill[indexPath.row].nameSkill
+ //           let sortSkill = toUser.skills!.sort{ $0.nameSkill < $1.nameSkill }
+            let ns = toUser.skills![indexPath.row].nameSkill
             let ps = String(toUser.skills![indexPath.row].percentSkill!)
             
             cell.nameSkills?.text = ns

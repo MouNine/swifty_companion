@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     var token = Token.sharedInstance
     var user: User!
+    var boo = true
     
     @IBOutlet weak var login: UITextField!
     @IBOutlet weak var search: UIButton!
@@ -35,6 +36,8 @@ class ViewController: UIViewController {
         if (token.access_token == nil) {
             post();
         }
+    
+    print("ViewLoad: \(self.boo)");
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +47,25 @@ class ViewController: UIViewController {
     
     @IBAction func search(sender: AnyObject) {
         get()
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.presentAlert()
+        })
+    }
+    
+    func presentAlert() {
+        if (login.text == "") {
+            self.boo = true
+            let alertController = UIAlertController(title: "Error", message: "Textfield is empty", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        } else if (self.boo == false) {
+            self.boo = true
+            let alertController = UIAlertController(title: "Error", message: "Login doesn't exist", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     // MARK: - Request POST
@@ -63,7 +85,6 @@ class ViewController: UIViewController {
                 if let access_token = self.token.access_token {
                     print("completed: \(access_token)")
                 }
-                print("ACCESS TOKEN, FIRST VIEW: \(self.token.getAccess())")
             }
         } catch let error {
             print("got an error creating the request: \(error)")
@@ -77,6 +98,7 @@ class ViewController: UIViewController {
             let opt = try HTTP.GET("https://api.intra.42.fr/v2/users/\(self.login!.text!)?access_token=\(self.token.access_token!)")
             opt.start { response in
                 if let err = response.error {
+                    self.boo = false
                     print("error: \(err.localizedDescription)")
                     return
                 }
