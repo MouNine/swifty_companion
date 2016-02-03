@@ -52,7 +52,7 @@ class TwoViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
         
-        print("ACCESS TOKEN, SECOND VIEW: \(token.setAccess(toAccess))")
+        token.setAccess(toAccess)
     }
 
     override func didReceiveMemoryWarning() {

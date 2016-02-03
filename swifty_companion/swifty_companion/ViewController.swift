@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     
     func post()
     {
-        let params = ["grant_type": "client_credentials", "client_id": "4fcfc213470d53a20d26216890c8c9a370a923bfc145b0c826a0d281b0a2833b", "client_secret": "df83e266d380746805db562ae018bc6b405dc379035e3ad03aa3f3f51608284e"]
+        let params = ["grant_type": "client_credentials", "client_id": "", "client_secret": ""]
         do {
             let opt = try HTTP.POST("https://api.intra.42.fr/oauth/token", parameters: params)
             opt.start { response in
